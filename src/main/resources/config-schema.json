@@ -1,0 +1,171 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/spike-config.schema.json",
+  "title": "SpikeLibConfig",
+  "description": "Schema for SpikeLib configuration (src/main/deploy/spike-config.json).",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "robot_mode": {
+      "type": "string",
+      "description": "String value of the RobotMode enum."
+    },
+    "logging": {
+      "$ref": "#/$defs/SpikeLoggingConfig"
+    },
+    "auto": {
+      "$ref": "#/$defs/SpikeAutoConfig"
+    },
+    "pneumatics": {
+      "$ref": "#/$defs/SpikePneumaticsConfig"
+    },
+    "vision": {
+      "$ref": "#/$defs/SpikeVisionConfig"
+    }
+  },
+  "required": ["robot_mode", "logging", "auto", "pneumatics", "vision"],
+  "$defs": {
+    "SpikeLoggingConfig": {
+      "title": "SpikeLoggingConfig",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "is_practice_mode": {
+          "type": "boolean",
+          "description": "Whether the robot is in practice mode."
+        },
+        "log_file_path": {
+          "type": "string",
+          "description": "Path to the log file directory or file."
+        }
+      },
+      "required": ["is_practice_mode", "log_file_path"]
+    },
+    "SpikeAutoConfig": {
+      "title": "SpikeAutoConfig",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "translation_p": { "type": "number" },
+        "translation_i": { "type": "number" },
+        "translation_d": { "type": "number" },
+        "rotation_p": { "type": "number" },
+        "rotation_i": { "type": "number" },
+        "rotation_d": { "type": "number" }
+      },
+      "required": [
+        "translation_p",
+        "translation_i",
+        "translation_d",
+        "rotation_p",
+        "rotation_i",
+        "rotation_d"
+      ]
+    },
+    "SpikePneumaticsConfig": {
+      "title": "SpikePneumaticsConfig",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "min_pressure": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Minimum allowable pressure (PSI)."
+        },
+        "max_pressure": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Maximum allowable pressure (PSI)."
+        },
+        "compressor_hub_id": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "CAN ID of the compressor module."
+        },
+        "use_pneumatics": {
+          "type": "boolean",
+          "description": "Enable or disable pneumatics."
+        },
+        "module_type": {
+          "type": "string",
+          "enum": ["CTREPCM", "REVPH"],
+          "description": "WPILib PneumaticsModuleType enum as string."
+        }
+      },
+      "required": [
+        "min_pressure",
+        "max_pressure",
+        "compressor_hub_id",
+        "use_pneumatics",
+        "module_type"
+      ]
+    },
+    "SpikeVisionConfig": {
+      "title": "SpikeVisionConfig",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "min_tag_count_validation": {
+          "type": "number",
+          "minimum": 0
+        },
+        "max_latency_sec_validation": {
+          "type": "number",
+          "minimum": 0
+        },
+        "min_tag_span_validation": {
+          "type": "number",
+          "minimum": 0
+        },
+        "min_avg_tag_area_validation": {
+          "type": "number",
+          "minimum": 0
+        },
+        "max_avg_tag_dist_meters_validation": {
+          "type": "number",
+          "minimum": 0
+        },
+        "limelights": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/LimelightConfigObject" }
+        },
+        "default_pipeline_index": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "required": [
+        "min_tag_count_validation",
+        "max_latency_sec_validation",
+        "min_tag_span_validation",
+        "min_avg_tag_area_validation",
+        "max_avg_tag_dist_meters_validation",
+        "limelights",
+        "default_pipeline_index"
+      ]
+    },
+    "LimelightConfigObject": {
+      "title": "LimelightConfigObject",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "id": { "type": "string" },
+        "translationX": { "type": "number" },
+        "translationY": { "type": "number" },
+        "translationZ": { "type": "number" },
+        "rotationX": { "type": "number" },
+        "rotationY": { "type": "number" },
+        "rotationZ": { "type": "number" }
+      },
+      "required": [
+        "id",
+        "translationX",
+        "translationY",
+        "translationZ",
+        "rotationX",
+        "rotationY",
+        "rotationZ"
+      ]
+    }
+  }
+}
