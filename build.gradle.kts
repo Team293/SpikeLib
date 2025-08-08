@@ -5,6 +5,7 @@ import java.io.File
 plugins {
     id("java")
     id("edu.wpi.first.GradleRIO") version "2025.3.2"
+    id("maven-publish")
 }
 
 java {
@@ -70,4 +71,18 @@ tasks.jar {
 tasks.register<JavaExec>("replayWatch") {
     mainClass.set("org.littletonrobotics.junction.ReplayWatch")
     classpath = sourceSets["main"].runtimeClasspath
+}
+
+publishing {
+    publications {
+        create<MavenPublication>("mavenJava") {
+            from(components["java"])
+            groupId = "com.spike293"
+            artifactId = "spike-lib"
+            version = "1.0.0"
+        }
+    }
+    repositories {
+        mavenLocal()
+    }
 }

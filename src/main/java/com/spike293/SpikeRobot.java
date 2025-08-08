@@ -2,6 +2,7 @@ package com.spike293;
 
 import com.spike293.config.SpikeLibConfig;
 import com.spike293.config.subconfigs.SpikeLoggingConfig;
+import com.spike293.controller.SpikeController;
 import com.spike293.telemetry.LoggedTracer;
 import edu.wpi.first.wpilibj.Threads;
 import edu.wpi.first.wpilibj.Timer;
@@ -21,7 +22,7 @@ import java.nio.file.Files;
 import java.util.Arrays;
 import java.util.function.Supplier;
 
-public class SpikeRobot extends LoggedRobot {
+public class SpikeRobot<C extends SpikeContainer> extends LoggedRobot {
     private static final SpikeLibConfig config = SpikeLibConfig.getOrLoadConfig();
     private static final SpikeLoggingConfig loggingConfig = config.getLoggingConfig();
 
@@ -33,11 +34,11 @@ public class SpikeRobot extends LoggedRobot {
             1000000000; // 1 GB
 
     private Command autonomousCommand;
-    private SpikeContainer spikeContainer;
+    private C spikeContainer;
 
-    private final Supplier<SpikeContainer> containerSupplier;
+    private final Supplier<C> containerSupplier;
 
-    public SpikeRobot(Class<SpikeContainer> spikeContainerClass) {
+    public SpikeRobot(Class<C> spikeContainerClass) {
         this.containerSupplier = () -> {
             try {
                 return spikeContainerClass.getDeclaredConstructor().newInstance();
