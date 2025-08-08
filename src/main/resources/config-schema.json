@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://example.com/spike-config.schema.json",
+  "$id": "https://team293.github.io/SpikeLib/schema/spike-config.schema.json",
   "title": "SpikeLibConfig",
   "description": "Schema for SpikeLib configuration (src/main/deploy/spike-config.json).",
   "type": "object",
