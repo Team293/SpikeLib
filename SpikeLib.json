@@ -1,0 +1,20 @@
+{
+    "fileName": "SpikeLib.json",
+    "name": "SpikeLib",
+    "version": "Tag",
+    "uuid": "00000000-0000-0000-0000-000000000293",
+    "frcYear": "2026",
+    "mavenUrls": [
+        "https://jitpack.io"
+    ],
+    "jsonUrl": "https://raw.githubusercontent.com/Team293/SpikeLib/SpikeLib.json",
+    "javaDependencies": [
+        {
+            "groupId": "com.github.Team293",
+            "artifactId": "SpikeLib",
+            "version": "Tag"
+        }
+    ],
+    "jniDependencies": [],
+    "cppDependencies": []
+}
