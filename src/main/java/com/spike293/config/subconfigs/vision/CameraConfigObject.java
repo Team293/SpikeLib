@@ -8,7 +8,7 @@ import lombok.Getter;
  */
 @Getter
 @AllArgsConstructor
-public class LimelightConfigObject {
+public class CameraConfigObject {
     private final String id;
     private final double translationX;
     private final double translationY;

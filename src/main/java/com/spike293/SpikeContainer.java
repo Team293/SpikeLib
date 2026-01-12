@@ -7,13 +7,13 @@ import com.pathplanner.lib.controllers.PPHolonomicDriveController;
 import com.spike293.config.subconfigs.SpikeAutoConfig;
 import com.spike293.config.SpikeLibConfig;
 import com.spike293.config.subconfigs.SpikePneumaticsConfig;
-import com.spike293.config.subconfigs.vision.LimelightConfigObject;
+import com.spike293.config.subconfigs.vision.CameraConfigObject;
 import com.spike293.config.subconfigs.vision.SpikeVisionConfig;
 import com.spike293.drive.PathPlannerSwerve;
 import com.spike293.drive.SwerveRequestContainer;
 import com.spike293.pneumatics.subsystem.Pneumatics;
-import com.spike293.vision.limelights.Limelight;
-import com.spike293.vision.limelights.VisionManager;
+import com.spike293.vision.photon.Camera;
+import com.spike293.vision.photon.VisionManager;
 import edu.wpi.first.math.geometry.Rotation3d;
 import edu.wpi.first.math.geometry.Transform3d;
 import edu.wpi.first.wpilibj.DriverStation;
@@ -41,7 +41,7 @@ public abstract class SpikeContainer {
             this.pneumatics = new Pneumatics();
         }
 
-        initializeLimelights();
+        initializeCameras();
     }
 
     protected void setupDrivetrain(PathPlannerSwerve swerve, double maxSpeed, double maxAngularRate) {
@@ -86,26 +86,25 @@ public abstract class SpikeContainer {
         SmartDashboard.putData("Auto Chooser", autoChooser);
     }
 
-    private void initializeLimelights() {
-        for (LimelightConfigObject configLimelight : visionConfig.getLimelights()) {
-            Transform3d limelightToRobot = new Transform3d(
-                    configLimelight.getTranslationX(),
-                    configLimelight.getTranslationY(),
-                    configLimelight.getTranslationZ(),
+    private void initializeCameras() {
+        for (CameraConfigObject configCamera : visionConfig.getLimelights()) {
+            Transform3d cameraToRobot = new Transform3d(
+                    configCamera.getTranslationX(),
+                    configCamera.getTranslationY(),
+                    configCamera.getTranslationZ(),
                     new Rotation3d(
-                            configLimelight.getRotationX(),
-                            configLimelight.getRotationY(),
-                            configLimelight.getRotationZ()
+                            configCamera.getRotationX(),
+                            configCamera.getRotationY(),
+                            configCamera.getRotationZ()
                     )
             );
 
-            Limelight limelight = new Limelight(
-                    configLimelight.getId(),
-                    limelightToRobot,
-                    visionConfig.getDefaultPipelineIndex()
+            Camera camera = new Camera(
+                    configCamera.getId(),
+                    cameraToRobot
             );
 
-            VisionManager.addLimelight(limelight);
+            VisionManager.addCamera(camera);
         }
     }
 

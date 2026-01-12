@@ -26,7 +26,7 @@ public class SpikeVisionConfig {
     private final double maxAvgTagDistMetersValidation;
 
     @JsonProperty("limelights")
-    private final LimelightConfigObject[] limelights;
+    private final CameraConfigObject[] limelights;
 
     @JsonProperty("default_pipeline_index")
     private final int defaultPipelineIndex;
