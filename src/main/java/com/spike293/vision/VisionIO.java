@@ -8,6 +8,6 @@ public interface VisionIO extends BaseIO<VisionIO.VisionIOInputs> {
     @AutoLog
     class VisionIOInputs extends BaseInputClass {
         public VisionEstimate[] estimates;
-        public String[] connectedLimelightIds;
+        public String[] connectedCameraIds;
     }
 }

@@ -22,9 +22,11 @@ version = "1.0-SNAPSHOT"
 repositories {
     mavenCentral()
     maven("https://frcmaven.wpi.edu/artifactory/release/")
+
     maven("https://3015rangerrobotics.github.io/pathplannerlib/repo")
     maven("https://maven.ctr-electronics.com/release/")
     maven("https://frcmaven.wpi.edu/artifactory/littletonrobotics-mvn-release/")
+    maven("https://maven.photonvision.org/releases")
 }
 
 dependencies {
@@ -36,6 +38,7 @@ dependencies {
     compileOnly("edu.wpi.first.cscore:cscore-java:+")
     compileOnly("edu.wpi.first.wpilibNewCommands:wpilibNewCommands-java:+")
     compileOnly("edu.wpi.first.cameraserver:cameraserver-java:+")
+    implementation("edu.wpi.first.apriltag:apriltag-java:+")
 
     compileOnly("org.projectlombok:lombok:1.18.38")
     annotationProcessor("org.projectlombok:lombok:1.18.38")
@@ -46,6 +49,9 @@ dependencies {
     compileOnly("com.pathplanner.lib:PathplannerLib-java:2026.1.2")
     compileOnly("org.littletonrobotics.akit:akit-java:4.1.2")
     implementation("us.hebi.quickbuf:quickbuf-runtime:1.4")
+
+    implementation("org.photonvision:photonlib-java:v2026.0.1-beta")
+    implementation("org.photonvision:photontargeting-java:v2026.0.1-beta")
 
     val akitJson = JsonSlurper().parseText(
         File(projectDir, "vendordeps/AdvantageKit.json").readText()

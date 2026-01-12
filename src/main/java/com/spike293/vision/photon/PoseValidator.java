@@ -1,4 +1,4 @@
-package com.spike293.vision.limelights;
+package com.spike293.vision.photon;
 
 import com.spike293.config.SpikeLibConfig;
 import com.spike293.config.subconfigs.vision.SpikeVisionConfig;
