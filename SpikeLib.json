@@ -1,7 +1,7 @@
 {
     "fileName": "SpikeLib.json",
     "name": "SpikeLib",
-    "version": "Tag",
+    "version": "-SNAPSHOT",
     "uuid": "dc34eb52-823d-4e2d-88a5-602118199c6b",
     "frcYear": "2026",
     "mavenUrls": [
@@ -12,7 +12,7 @@
         {
             "groupId": "com.github.Team293",
             "artifactId": "SpikeLib",
-            "version": "Tag"
+            "version": "-SNAPSHOT"
         }
     ],
     "jniDependencies": [],
