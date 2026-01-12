@@ -82,7 +82,7 @@ public class SpikeRobot<C extends SpikeContainer> extends LoggedRobot {
         this.autonomousCommand = this.spikeContainer.getAutoCommand();
 
         if (this.autonomousCommand != null) {
-            this.autonomousCommand.schedule();
+            CommandScheduler.getInstance().schedule(this.autonomousCommand);
         }
     }
 

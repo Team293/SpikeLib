@@ -4,7 +4,7 @@ import java.io.File
 
 plugins {
     id("java")
-    id("edu.wpi.first.GradleRIO") version "2025.3.2"
+    id("edu.wpi.first.GradleRIO") version "2026.1.1-beta-1"
     id("maven-publish")
 }
 
@@ -43,7 +43,7 @@ dependencies {
     implementation("com.fasterxml.jackson.core:jackson-databind:2.20.0-rc1")
 
     compileOnly("com.ctre.phoenix6:wpiapi-java:+")
-    compileOnly("com.pathplanner.lib:PathplannerLib-java:2025.2.2")
+    compileOnly("com.pathplanner.lib:PathplannerLib-java:2026.1.2")
     compileOnly("org.littletonrobotics.akit:akit-java:4.1.2")
     implementation("us.hebi.quickbuf:quickbuf-runtime:1.4")
 
