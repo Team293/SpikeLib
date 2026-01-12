@@ -6,35 +6,31 @@ import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.SwerveModulePosition;
 
+import java.util.function.BiConsumer;
 import java.util.function.Consumer;
+import java.util.function.Function;
 import java.util.function.Supplier;
 
 public class Vision extends SpikeSubsystem {
     private final VisionIO io;
     private final VisionIOInputsAutoLogged inputs;
-    private final Supplier<Rotation2d> gyroSupplier;
-    private final SwerveDrivePoseEstimator estimator;
-    private final Supplier<SwerveModulePosition[]> positionSupplier;
+    private final BiConsumer<Pose2d, Double> poseConsumer;
 
-    public Vision(Supplier<Rotation2d> gyroSupplier, Supplier<SwerveModulePosition[]> positionSupplier, SwerveDrivePoseEstimator estimator) {
+    public Vision(BiConsumer<Pose2d, Double> poseConsumer) {
         super("Vision");
 
         this.io = new VisionIOImpl();
         this.inputs = new VisionIOInputsAutoLogged();
-        this.gyroSupplier = gyroSupplier;
-        this.estimator = estimator;
-        this.positionSupplier = positionSupplier;
+        this.poseConsumer = poseConsumer;
     }
 
     @Override
     public void onPeriodic() {
         for (VisionEstimate estimate : inputs.estimates) {
-            estimator.addVisionMeasurement(
+            poseConsumer.accept(
                     estimate.poseEstimate(),
                     estimate.timestamp()
             );
-
-            estimator.updateWithTime(System.currentTimeMillis(), gyroSupplier.get(), positionSupplier.get());
         }
     }
 
